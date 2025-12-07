@@ -128,6 +128,7 @@
         section:nth-child(3) { animation-delay: 0.4s; }
         section:nth-child(4) { animation-delay: 0.6s; }
         section:nth-child(5) { animation-delay: 0.8s; }
+        section:nth-child(6) { animation-delay: 1.0s; }
 
         h2 {
             font-family: 'Crimson Text', serif;
@@ -229,6 +230,129 @@
             background: rgba(212, 165, 116, 0.15);
             border-color: var(--accent-gold);
             transform: translateX(5px);
+        }
+
+        /* Projects Section */
+        .projects-list {
+            display: grid;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .project {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: var(--accent-blue);
+            transform: translateX(8px);
+        }
+
+        .project-header {
+            margin-bottom: 1rem;
+        }
+
+        .project-type {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-highlights {
+            background: rgba(91, 143, 185, 0.05);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .project-highlights h4 {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .project-highlights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-highlights li {
+            color: var(--text-secondary);
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .project-highlights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(91, 143, 185, 0.1);
+            border: 1px solid rgba(91, 143, 185, 0.3);
+            border-radius: 6px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(91, 143, 185, 0.2);
+            border-color: var(--accent-blue);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .project-team {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .project-team strong {
+            color: var(--accent-gold);
         }
 
         /* Publications */
@@ -511,6 +635,43 @@
                 <div class="interest-tag">Procedural Knowledge</div>
                 <div class="interest-tag">AI Alignment</div>
                 <div class="interest-tag">Reinforcement Learning</div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Selected Projects</h2>
+            <div class="projects-list">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-type">Deep Reinforcement Learning</div>
+                        <div class="project-title">Foraging in the Field: Optimal Decision-Making with DDQN</div>
+                    </div>
+                    
+                    <div class="project-description">
+                        Developed an autonomous agent using Double Deep Q-Learning (DDQN) to solve an optimal foraging problem inspired by behavioral ecology. The project explores how reinforcement learning can model animal and human decision-making in resource-constrained environments, specifically addressing when to leave a depleting patch to search for better resources.
+                    </div>
+
+                    <div class="project-highlights">
+                        <h4>Key Achievements:</h4>
+                        <ul>
+                            <li>Outperformed human baseline (183 players) with mean score of 416.5 vs. 344.8</li>
+                            <li>Designed 35-dimensional state space with directional scanning and density features</li>
+                            <li>Implemented custom OpenAI Gym environment with Pygame integration</li>
+                            <li>Applied noise regularization and exploration strategies for large-scale environments (20,000×20,000)</li>
+                            <li>Trained lightweight model (26 hours without GPU) demonstrating computational efficiency</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-description">
+                        The work connects reinforcement learning with neuroscience concepts like the Marginal Value Theorem and demonstrates practical applications of DQN variants in complex optimization scenarios. The agent successfully learned patch-leaving behavior and efficient exploration strategies comparable to biological foraging patterns.
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://www.youtube.com/watch?v=fK6x31qMzqw" target="_blank" class="project-link">
+                            <span>🎥</span> Watch Demo
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
