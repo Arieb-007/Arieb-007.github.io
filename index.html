@@ -100,12 +100,12 @@
   <section class="papers-band" aria-labelledby="papers">
     <div class="wrap wide">
       <h2 id="papers">Papers</h2>
-      <p class="papers-note">One figure per paper, drawn to show the central idea. Full list, with code, on the <a href="publications.html">publications page</a>.</p>
+      <p class="papers-note">Each shown with a detail from its main figure. Full list, with code, on the <a href="publications.html">publications page</a>.</p>
 
       <ol class="papers" reversed>
         <li>
           <a class="fig" href="https://arxiv.org/abs/2610.02173" tabindex="-1" aria-hidden="true">
-            <img src="figures/dose.svg" alt="" width="400" height="300" loading="lazy">
+            <img src="figures/dose.svg" alt="" width="480" height="300" loading="lazy">
           </a>
           <p class="venue">Preprint, 2026</p>
           <h3><a href="https://arxiv.org/abs/2610.02173">Every Ablation Is a Dose: Counterweights and the Semblance of <span class="nw">Self-Repair</span></a></h3>
@@ -120,7 +120,7 @@
 
         <li>
           <a class="fig" href="https://arxiv.org/abs/2511.20273" tabindex="-1" aria-hidden="true">
-            <img src="figures/beyond.svg" alt="" width="400" height="300" loading="lazy">
+            <img src="figures/beyond.png" alt="" width="1200" height="750" loading="lazy">
           </a>
           <p class="venue">NeurIPS 2025</p>
           <h3><a href="https://arxiv.org/abs/2511.20273">Beyond Components: Singular Vector-Based Interpretability of Transformer Circuits</a></h3>
@@ -134,7 +134,7 @@
 
         <li>
           <a class="fig" href="https://arxiv.org/abs/2511.00280" tabindex="-1" aria-hidden="true">
-            <img src="figures/calibration.svg" alt="" width="400" height="300" loading="lazy">
+            <img src="figures/calibration.png" alt="" width="1200" height="750" loading="lazy">
           </a>
           <p class="venue">EMNLP 2025</p>
           <h3><a href="https://arxiv.org/abs/2511.00280">Calibration Across Layers: Understanding Calibration Evolution in LLMs</a></h3>
@@ -148,7 +148,7 @@
 
         <li>
           <a class="fig" href="https://arxiv.org/abs/2504.10077" tabindex="-1" aria-hidden="true">
-            <img src="figures/commonsense.svg" alt="" width="400" height="300" loading="lazy">
+            <img src="figures/commonsense.png" alt="" width="1200" height="750" loading="lazy">
           </a>
           <p class="venue">NAACL 2025</p>
           <h3><a href="https://arxiv.org/abs/2504.10077">Towards Quantifying Commonsense Reasoning with Mechanistic Insights</a></h3>
@@ -162,7 +162,7 @@
 
         <li>
           <a class="fig" href="https://arxiv.org/abs/2411.19500" tabindex="-1" aria-hidden="true">
-            <img src="figures/cold.svg" alt="" width="400" height="300" loading="lazy">
+            <img src="figures/cold.png" alt="" width="1200" height="750" loading="lazy">
           </a>
           <p class="venue">NeurIPS 2024</p>
           <h3><a href="https://arxiv.org/abs/2411.19500">COLD: Causal Reasoning in Closed Daily Activities</a></h3>
@@ -176,7 +176,7 @@
 
         <li>
           <a class="fig" href="https://arxiv.org/abs/2307.03906" tabindex="-1" aria-hidden="true">
-            <img src="figures/scriptworld.svg" alt="" width="400" height="300" loading="lazy">
+            <img src="figures/scriptworld.png" alt="" width="1200" height="750" loading="lazy">
           </a>
           <p class="venue">IJCAI 2023</p>
           <h3><a href="https://arxiv.org/abs/2307.03906">ScriptWorld: Text Based Environment for Learning Procedural Knowledge</a></h3>
@@ -188,16 +188,46 @@
           <p class="byline">Abhinav Joshi, <span class="me">Areeb Ahmad</span>, Umang Pandey, Ashutosh Modi</p>
         </li>
       </ol>
-      <p class="byline footnote">* Equal contribution. Figures are schematics drawn for this page, not plots from the papers.</p>
+      <p class="byline footnote">* Equal contribution.</p>
     </div>
   </section>
 
   <div class="wrap">
+    <section aria-labelledby="foraging" class="foraging">
+      <h2 id="foraging">Foraging with deep reinforcement learning</h2>
+      <div class="foraging-grid">
+        <a class="video" href="https://www.youtube.com/watch?v=fK6x31qMzqw" id="foraging-video" aria-label="Watch the foraging agent demo on YouTube">
+          <img src="https://img.youtube.com/vi/fK6x31qMzqw/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+          <span class="play" aria-hidden="true"></span>
+        </a>
+        <div>
+          <p>
+            An undergraduate project from 2021 that I'm still fond of. When should a
+            forager leave a patch that is running out and go looking for a better one?
+            I framed the problem from behavioural ecology as a Markov decision process
+            in a 20k×20k environment and trained a Double DQN agent on it.
+          </p>
+          <dl class="stats">
+            <div><dt>Agent</dt><dd>416.5</dd></div>
+            <div><dt>Human baseline</dt><dd>344.8</dd></div>
+            <div><dt>Players beaten</dt><dd>183</dd></div>
+          </dl>
+          <p>
+            The agent scored 21% higher on average than the 183 people who played the
+            same game, and its patch-leaving behaviour matched what foraging theory
+            predicts for animals. Supervised by Ashutosh Modi and Arjun Ramakrishnan.
+          </p>
+          <ul class="links">
+            <li><a href="https://www.youtube.com/watch?v=fK6x31qMzqw">Watch the demo</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section aria-labelledby="background" class="background">
       <h2 id="background">Background</h2>
       <p>
-        I studied at IIT Kanpur (B.Tech in Civil Engineering with a minor in Machine
-        Learning, 2018–2023). From 2022 to 2025 I worked in the Exploration Lab with
+        I studied at IIT Kanpur (B.Tech with a minor in Machine Learning, 2018–2023). From 2022 to 2025 I worked in the Exploration Lab with
         Ashutosh Modi, first as an undergraduate researcher and then as a research
         associate, on causal and commonsense reasoning in language models and RL
         agents. In 2021 I interned with Jyotirmoy Deshmukh at the CPS-VIDA lab at USC.
@@ -214,5 +244,21 @@
       <a href="mailto:areeb007.aa@gmail.com">areeb007.aa@gmail.com</a>
     </footer>
   </div>
+  <script>
+    (function () {
+      var a = document.getElementById('foraging-video');
+      if (!a) return;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/fK6x31qMzqw?autoplay=1';
+        f.title = 'Foraging agent demo';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture';
+        f.allowFullscreen = true;
+        a.replaceWith(f);
+        f.className = 'video';
+      });
+    })();
+  </script>
 </body>
 </html>

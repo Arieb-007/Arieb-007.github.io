@@ -1,42 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schematic: unit responses are straight lines in the intervention strength lambda; blue slopes counteract, red slopes reinforce.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Schematic of the affine law: each unit's response is a straight line in the intervention strength lambda.">
   <style>
-    .bg{fill:#e8ecf0}.ink{stroke:#17202b}.inkf{fill:#17202b}.mut{stroke:#8a94a1}.mutf{fill:#8a94a1}
-    .blue{stroke:#2c66ae}.bluef{fill:#2c66ae}.red{stroke:#b4343c}.redf{fill:#b4343c}
-    .redw{fill:#b4343c;fill-opacity:.12}.bluew{fill:#2c66ae;fill-opacity:.12}
-    .open{fill:#e8ecf0}
-    text{font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#56606d}
-    .lab{font-family:Newsreader,"Iowan Old Style",Georgia,serif;font-style:italic;font-size:15px;fill:#17202b}
-    @media (prefers-color-scheme:dark){
-      .bg{fill:#1a2029}.ink{stroke:#e4e8ed}.inkf{fill:#e4e8ed}.mut{stroke:#6b7682}.mutf{fill:#6b7682}
-      .blue{stroke:#74a6e2}.bluef{fill:#74a6e2}.red{stroke:#e57d84}.redf{fill:#e57d84}
-      .redw{fill:#e57d84;fill-opacity:.14}.bluew{fill:#74a6e2;fill-opacity:.14}.open{fill:#1a2029}
-      text{fill:#9aa4b1}.lab{fill:#e4e8ed}
-    }
+    text{font-family:"Times New Roman",Times,serif;font-size:13px;fill:#222}
+    .m{font-style:italic;font-size:15px}
+    .ax{stroke:#222;stroke-width:1}
+    .b{stroke:#1f4e9c;stroke-width:2.2;fill:none}
+    .r{stroke:#b4343c;stroke-width:2.2;fill:none}
+    .ob{fill:#fff;stroke:#1f4e9c;stroke-width:1.6}
+    .or{fill:#fff;stroke:#b4343c;stroke-width:1.6}
   </style>
-  <!-- axes: x = λ in [-1,1] mapped to 50..370; y = E in [-1.1,1.1] mapped to 250..40 -->
-  <line class="mut" x1="50" y1="145" x2="370" y2="145" stroke-width="1"/>
-  <line class="mut" x1="210" y1="36" x2="210" y2="252" stroke-width="1" stroke-dasharray="3 4"/>
-  <text x="50" y="272" text-anchor="middle">−1</text>
-  <text x="210" y="272" text-anchor="middle">0</text>
-  <text x="370" y="272" text-anchor="middle">1</text>
-  <text class="lab" x="384" y="150">λ</text>
-  <text class="lab" x="22" y="30">E<tspan font-size="11" baseline-shift="sub">r</tspan>(λ)</text>
-  <!-- units: own, gamma -> y = 145 - (own + g*λ)*95 -->
-  <line class="blue" x1="50" y1="50"  x2="370" y2="135" stroke-width="2.2"/>
-  <line class="blue" x1="50" y1="64"  x2="370" y2="197" stroke-width="2.2"/>
-  <line class="blue" x1="50" y1="135" x2="370" y2="192" stroke-width="2.2"/>
-  <line class="red"  x1="50" y1="159" x2="370" y2="64"  stroke-width="2.2"/>
-  <line class="red"  x1="50" y1="216" x2="370" y2="159" stroke-width="2.2"/>
-  <circle class="open blue" cx="210" cy="92.5" r="4" stroke-width="1.6"/>
-  <circle class="open blue" cx="210" cy="130.5" r="4" stroke-width="1.6"/>
-  <circle class="open blue" cx="210" cy="163.5" r="4" stroke-width="1.6"/>
-  <circle class="open red"  cx="210" cy="111.5" r="4" stroke-width="1.6"/>
-  <circle class="open red"  cx="210" cy="187.5" r="4" stroke-width="1.6"/>
-  <!-- probe at λ = 0.6 -->
-  <line class="ink" x1="306" y1="36" x2="306" y2="252" stroke-width="1"/>
-  <circle class="bluef" cx="306" cy="118" r="4.5"/>
-  <circle class="bluef" cx="306" cy="170" r="4.5"/>
-  <circle class="bluef" cx="306" cy="180.5" r="4.5"/>
-  <circle class="redf"  cx="306" cy="83"  r="4.5"/>
-  <circle class="redf"  cx="306" cy="170.5" r="4.5"/>
+  <rect width="480" height="300" fill="#fff"/>
+  <!-- axes -->
+  <line class="ax" x1="60" y1="150" x2="440" y2="150"/>
+  <line class="ax" x1="60" y1="40" x2="60" y2="262"/>
+  <line x1="250" y1="40" x2="250" y2="262" stroke="#999" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="60" y="280" text-anchor="middle">−1</text>
+  <text x="250" y="280" text-anchor="middle">0</text>
+  <text x="440" y="280" text-anchor="middle">1</text>
+  <text class="m" x="455" y="155">λ</text>
+  <text class="m" x="46" y="32" text-anchor="end">E<tspan font-size="11" baseline-shift="sub">r</tspan>(λ)</text>
+  <!-- units: y = 150 - (own + γλ)·95 ; λ∈[-1,1] ↦ x∈[60,440] -->
+  <line class="b" x1="60" y1="55"  x2="440" y2="140"/>
+  <line class="b" x1="60" y1="69"  x2="440" y2="202"/>
+  <line class="b" x1="60" y1="140" x2="440" y2="197"/>
+  <line class="r" x1="60" y1="164" x2="440" y2="69"/>
+  <line class="r" x1="60" y1="221" x2="440" y2="164"/>
+  <circle class="ob" cx="250" cy="97.5" r="4"/>
+  <circle class="ob" cx="250" cy="135.5" r="4"/>
+  <circle class="ob" cx="250" cy="168.5" r="4"/>
+  <circle class="or" cx="250" cy="116.5" r="4"/>
+  <circle class="or" cx="250" cy="192.5" r="4"/>
+  <!-- legend -->
+  <line class="b" x1="300" y1="228" x2="324" y2="228"/><text x="330" y="232">γ<tspan font-size="10" baseline-shift="sub">r</tspan> &lt; 0, counterweight</text>
+  <line class="r" x1="300" y1="246" x2="324" y2="246"/><text x="330" y="250">γ<tspan font-size="10" baseline-shift="sub">r</tspan> &gt; 0, reinforcer</text>
 </svg>
