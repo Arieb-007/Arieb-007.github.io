@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schematic: across layers, correctness settles early while confidence overshoots and is recalibrated in the upper layers.">
+  <style>
+    .bg{fill:#e8ecf0}.ink{stroke:#17202b}.inkf{fill:#17202b}.mut{stroke:#8a94a1}.mutf{fill:#8a94a1}
+    .blue{stroke:#2c66ae}.bluef{fill:#2c66ae}.red{stroke:#b4343c}.redf{fill:#b4343c}
+    .redw{fill:#b4343c;fill-opacity:.12}.bluew{fill:#2c66ae;fill-opacity:.12}
+    .open{fill:#e8ecf0}
+    text{font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#56606d}
+    .lab{font-family:Newsreader,"Iowan Old Style",Georgia,serif;font-style:italic;font-size:15px;fill:#17202b}
+    @media (prefers-color-scheme:dark){
+      .bg{fill:#1a2029}.ink{stroke:#e4e8ed}.inkf{fill:#e4e8ed}.mut{stroke:#6b7682}.mutf{fill:#6b7682}
+      .blue{stroke:#74a6e2}.bluef{fill:#74a6e2}.red{stroke:#e57d84}.redf{fill:#e57d84}
+      .redw{fill:#e57d84;fill-opacity:.14}.bluew{fill:#74a6e2;fill-opacity:.14}.open{fill:#1a2029}
+      text{fill:#9aa4b1}.lab{fill:#e4e8ed}
+    }
+  </style>
+  <line class="mut" x1="50" y1="240" x2="370" y2="240" stroke-width="1"/>
+  <line class="mut" x1="50" y1="240" x2="50" y2="40" stroke-width="1"/>
+  <text x="50" y="262" text-anchor="middle">0</text>
+  <text x="370" y="262" text-anchor="middle">L</text>
+  <text class="lab" x="210" y="286" text-anchor="middle">layer</text>
+  <!-- overconfidence region -->
+  <path class="redw" d="M150 118 C 190 70, 230 58, 270 82 C 300 100, 330 118, 370 120 L 370 122 C 330 124, 290 126, 150 122 Z"/>
+  <!-- accuracy / decision curve -->
+  <path class="blue" fill="none" stroke-width="2.4" d="M50 232 C 90 230, 110 190, 150 122 C 170 110, 220 120, 370 122"/>
+  <!-- confidence curve -->
+  <path class="red" fill="none" stroke-width="2.4" d="M50 236 C 100 236, 120 200, 150 118 C 190 70, 230 58, 270 82 C 300 100, 330 118, 370 120"/>
+  <!-- decision marker -->
+  <line class="ink" x1="150" y1="40" x2="150" y2="240" stroke-width="1" stroke-dasharray="3 4"/>
+  <text x="150" y="32" text-anchor="middle">answer settles</text>
+  <text x="268" y="52" text-anchor="middle">overconfident</text>
+  <text x="332" y="146" text-anchor="middle">recalibrated</text>
+  <rect class="redf" x="64" y="52" width="12" height="3"/><text x="82" y="57">confidence</text>
+  <rect class="bluef" x="64" y="72" width="12" height="3"/><text x="82" y="77">correctness</text>
+</svg>

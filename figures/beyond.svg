@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schematic: a single attention head decomposed into orthogonal singular directions of different strengths, grouped into separate subfunctions.">
+  <style>
+    .bg{fill:#e8ecf0}.ink{stroke:#17202b}.inkf{fill:#17202b}.mut{stroke:#8a94a1}.mutf{fill:#8a94a1}
+    .blue{stroke:#2c66ae}.bluef{fill:#2c66ae}.red{stroke:#b4343c}.redf{fill:#b4343c}
+    .redw{fill:#b4343c;fill-opacity:.12}.bluew{fill:#2c66ae;fill-opacity:.12}
+    .open{fill:#e8ecf0}
+    text{font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#56606d}
+    .lab{font-family:Newsreader,"Iowan Old Style",Georgia,serif;font-style:italic;font-size:15px;fill:#17202b}
+    @media (prefers-color-scheme:dark){
+      .bg{fill:#1a2029}.ink{stroke:#e4e8ed}.inkf{fill:#e4e8ed}.mut{stroke:#6b7682}.mutf{fill:#6b7682}
+      .blue{stroke:#74a6e2}.bluef{fill:#74a6e2}.red{stroke:#e57d84}.redf{fill:#e57d84}
+      .redw{fill:#e57d84;fill-opacity:.14}.bluew{fill:#74a6e2;fill-opacity:.14}.open{fill:#1a2029}
+      text{fill:#9aa4b1}.lab{fill:#e4e8ed}
+    }
+  </style>
+  <rect class="ink" x="40" y="105" width="88" height="90" rx="6" fill="none" stroke-width="1.6"/>
+  <text class="lab" x="84" y="145" text-anchor="middle">head</text>
+  <text x="84" y="165" text-anchor="middle">W<tspan font-size="9" baseline-shift="sub">OV</tspan></text>
+  <!-- decomposition arrow -->
+  <line class="ink" x1="136" y1="150" x2="178" y2="150" stroke-width="1.4"/>
+  <path class="inkf" d="M178 150 l-7 -4 v8 z"/>
+  <text x="157" y="140" text-anchor="middle">SVD</text>
+  <!-- singular directions from a common origin, length ∝ σ -->
+  <g transform="translate(240 170)">
+    <circle class="inkf" r="3"/>
+    <line class="blue" x1="0" y1="0" x2="118" y2="-62" stroke-width="2.6"/>
+    <line class="blue" x1="0" y1="0" x2="92" y2="-100" stroke-width="2.6"/>
+    <line class="red"  x1="0" y1="0" x2="112" y2="30" stroke-width="2.6"/>
+    <line class="mut"  x1="0" y1="0" x2="-36" y2="-70" stroke-width="2"/>
+    <line class="mut"  x1="0" y1="0" x2="-52" y2="-18" stroke-width="2"/>
+    <line class="mut"  x1="0" y1="0" x2="26" y2="52" stroke-width="2"/>
+    <circle class="bluef" cx="118" cy="-62" r="4"/>
+    <circle class="bluef" cx="92" cy="-100" r="4"/>
+    <circle class="redf"  cx="112" cy="30" r="4"/>
+    <circle class="mutf" cx="-36" cy="-70" r="3"/>
+    <circle class="mutf" cx="-52" cy="-18" r="3"/>
+    <circle class="mutf" cx="26" cy="52" r="3"/>
+    <text x="100" y="-112" text-anchor="middle">σ<tspan font-size="9" baseline-shift="sub">1</tspan></text>
+    <text x="131" y="-62">σ<tspan font-size="9" baseline-shift="sub">2</tspan></text>
+    <text x="125" y="36">σ<tspan font-size="9" baseline-shift="sub">3</tspan></text>
+  </g>
+  <text x="300" y="262" text-anchor="middle">subfunction A</text>
+  <rect class="bluef" x="243" y="254" width="12" height="3"/>
+  <text x="300" y="282" text-anchor="middle">subfunction B</text>
+  <rect class="redf" x="243" y="274" width="12" height="3"/>
+</svg>
