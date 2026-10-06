@@ -9,12 +9,12 @@ Personal research site, served by GitHub Pages from the `main` branch. Plain HTM
 | `reading.html` | Bookshelf |
 | `style.css` | Shared styles, light and dark |
 | `figures/*.png` | A detail cropped from each paper's main figure (from the papers' GitHub repos), used on the home page and as thumbnails on the publications page |
-| `figures/dose.png` | Schematic of the affine law for the ablation paper, rendered by `figures_src/dose_fig.py` (illustrative values, not paper data) |
+| `figures/dose.png` | For the ablation paper: a version of its Figure 2 (weight alignment vs measured \|γ\|), rendered by `figures_src/dose_fig.py` with synthetic points matched to the reported counts and correlation |
 | `figures_src/` | Sources for figures: the plotting script, and original full-size figures that the crops in `figures/` come from |
 | `favicon.svg` | Site icon |
 
 ## Common edits
 
 - **New paper:** add an `<li>` under the right year in `publications.html`. If it belongs on the home page, see the next-but-one item.
-- **Replace or add a figure:** tiles are 16:10 with a white background and `object-fit: contain`, so export a crop at about 1200×750 (white background) into `figures/` and point the two `src` attributes at it (home page and publications page). The ablation paper's tile is a schematic made by `python3 figures_src/dose_fig.py` (run from the repo root); replace `figures/dose.png` with a crop of the paper's own figure when you want the real one.
+- **Replace or add a figure:** tiles are 16:10 with a white background and `object-fit: contain`, so export a crop at about 1200×750 (white background) into `figures/` and point the two `src` attributes at it (home page and publications page). The ablation paper's tile is made by `python3 figures_src/dose_fig.py` (run from the repo root); replace `figures/dose.png` with a crop of the paper's own Figure 2 when you want the real one.
 - **New paper on the home page:** copy one `<li>` in the `.papers` list in `index.html`. The grid is 2 across, so keep the count even.
