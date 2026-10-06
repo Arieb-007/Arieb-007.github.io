@@ -1,59 +1,88 @@
-"""Figure for 'Every Ablation Is a Dose' (arXiv:2610.02173), modelled on the
-paper's Figure 2: static weight alignment z against measured |gamma|, as
-within-model ranks. Points are synthetic, generated to match the reported
-counts (52 counterweights, 16 relays, 81 downstream directions) and the
-pooled rank correlation (+0.73). Run from the repo root."""
+"""Tile for 'Every Ablation Is a Dose' (arXiv:2610.02173): a high-resolution
+redraw of the paper's two-panel dose figure (reference screenshot in
+figures_src/dose_paper_figure.png). Panel (a): the dose axis and where
+conventional ablations land on it. Panel (b): one direction's response is
+affine in the dose; held-out doses at +-1/2 fall on the fit. Values in (b)
+are read off the paper's figure. Run from the repo root."""
 import numpy as np, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from scipy.stats import spearmanr
+from matplotlib.lines import Line2D
 
 plt.rcParams.update({"font.family": "STIXGeneral", "mathtext.fontset": "stix",
-                     "font.size": 15, "axes.linewidth": 0.8})
-BLUE, ORANGE, GREY, INK = "#1f4e9c", "#e07b22", "#9aa3ad", "#222"
-N, N_CW, N_RL, TARGET = 81, 52, 16, 0.73
+                     "font.size": 14, "axes.linewidth": 0.8})
+INK, BAND = "#1f2a3a", "#ebebeb"
+BLUE, ORANGE, GREY = "#4f86c6", "#e8743b", "#8c8c8c"
+GREEN, RED = "#2a9d6b", "#d8432c"
 
-# search seeds for a sample whose Spearman rho rounds to the reported value
-best = None
-for seed in range(2000):
-    rng = np.random.default_rng(seed)
-    z = rng.normal(size=N)
-    g = 0.78 * z + np.sqrt(1 - 0.78**2) * rng.normal(size=N)
-    rho = spearmanr(z, g).correlation
-    if abs(rho - TARGET) < 0.003:
-        best = (seed, z, g, rho); break
-seed, z, g, rho = best
-rx = np.argsort(np.argsort(z)) + 1          # within-model ranks, 1..81
-ry = np.argsort(np.argsort(g)) + 1
-# the 13 directions without a significant slope sit at the low-|gamma| end
-order = np.argsort(ry)
-ns, sig = order[:N - N_CW - N_RL], order[N - N_CW - N_RL:]
-rng = np.random.default_rng(seed)
-rl = rng.choice(sig, N_RL, replace=False)
-cw = np.setdiff1d(sig, rl)
-# a few upstream controls (no causal path), hollow, off the trend
-ctrl_x = rng.uniform(5, 78, 7); ctrl_y = rng.uniform(3, 30, 7)
+fig = plt.figure(figsize=(8, 5), dpi=150)
+gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.08], left=0.03, right=0.985, top=0.93, bottom=0.14, wspace=0.28)
 
-fig, ax = plt.subplots(figsize=(8, 5), dpi=150)
-ax.scatter(rx[cw], ry[cw], s=46, color=BLUE, edgecolor="white", linewidth=0.6, zorder=3, label="counterweight, $\\gamma_r<0$")
-ax.scatter(rx[rl], ry[rl], s=46, color=ORANGE, edgecolor="white", linewidth=0.6, zorder=3, label="relay, $\\gamma_r>0$")
-ax.scatter(rx[ns], ry[ns], s=26, color=GREY, edgecolor="white", linewidth=0.6, zorder=2, label="no significant slope")
-ax.scatter(ctrl_x, ctrl_y, s=46, facecolor="white", edgecolor=INK, linewidth=1.0, zorder=3, label="upstream control, no causal path")
+# ---------- (a) the dose axis ----------
+ax = fig.add_subplot(gs[0])
+ax.set_xlim(1.8, -1.55); ax.set_ylim(0, 1); ax.axis("off")
+ax.axvspan(1, -1, color=BAND, zorder=0)
+ax.text(1.78, 0.98, "a", fontsize=17, fontweight="bold", va="top", ha="left", color=INK)
 
-# rank-regression trend, drawn lightly
-b, a = np.polyfit(rx, ry, 1)
-xx = np.array([1, N]); ax.plot(xx, a + b * xx, color=INK, lw=0.9, ls=(0, (5, 4)), zorder=1)
+y_dose = 0.88
+ax.plot([1, -1], [y_dose, y_dose], color=INK, lw=1.8, zorder=2)
+ax.plot([-1, -1.35], [y_dose, y_dose], color=INK, lw=1.4, ls=(0, (3, 2.5)), zorder=2)
+ax.annotate("", (-1.42, y_dose), (-1.35, y_dose), arrowprops=dict(arrowstyle="-|>", color=INK, lw=1.2, mutation_scale=12))
+ax.plot([1, -1], [y_dose, y_dose], "o", color=INK, ms=8, zorder=3)
+ax.plot([0], [y_dose], "D", mfc="white", mec=INK, mew=1.4, ms=8, zorder=3)
 
-ax.text(0.03, 0.95, f"Spearman $\\rho$ = +{rho:.2f},  $n$ = {N}", transform=ax.transAxes,
-        ha="left", va="top", fontsize=15, color=INK)
-ax.set_xlabel("static alignment $z$ from the weights (within-model rank)")
-ax.set_ylabel("measured $|\\gamma_r|$ (within-model rank)")
-ax.set_xlim(0, N + 1); ax.set_ylim(0, N + 1)
-ax.set_xticks([1, 20, 40, 60, 81]); ax.set_yticks([1, 20, 40, 60, 81])
-ax.tick_params(labelsize=13, length=3)
-for s in ("top", "right"): ax.spines[s].set_visible(False)
-ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=2, frameon=False, fontsize=12.5, handletextpad=0.4, columnspacing=2.0)
-ax.set_title("The weights anticipate the coupling strength", loc="left", fontsize=17, pad=12)
-fig.subplots_adjust(left=0.1, right=0.98, top=0.9, bottom=0.27)
+y_ax = 0.745
+ax.annotate("", (-1.5, y_ax), (1.2, y_ax), arrowprops=dict(arrowstyle="-|>", color=INK, lw=1.0, mutation_scale=12))
+ax.text(-1.46, y_ax + 0.035, r"$\lambda$", fontsize=15, ha="right", va="bottom", color=INK)
+for x, top, bot in [(1, "+1", "clean"), (0, "0", "neutral"), (-1, "−1", "inverted")]:
+    ax.plot([x, x], [y_ax - 0.015, y_ax + 0.015], color=INK, lw=1)
+    ax.text(x, y_ax - 0.035, top, ha="center", va="top", fontsize=13, color=INK)
+    ax.text(x, y_ax - 0.105, bot, ha="center", va="top", fontsize=13, color=INK)
+
+xs = np.linspace(1.3, -1.55, 600)
+def gauss(mu, sd): return np.exp(-0.5 * ((xs - mu) / sd) ** 2)
+rows = [("zero", BLUE, gauss(0.02, 0.17), True, 0.02),
+        ("mean", ORANGE, gauss(0.03, 0.19), True, 0.03),
+        ("resample", GREY, 0.85 * (gauss(0.9, 0.17) + gauss(-0.9, 0.17)), False, None)]
+y0, h = 0.42, 0.12
+for i, (name, col, ys, filled, mode) in enumerate(rows):
+    base = y0 - i * 0.165
+    ax.plot([1.3, -1.55], [base, base], color=col if filled else GREY, lw=0.9, zorder=1)
+    if filled:
+        ax.fill_between(xs, base, base + h * ys, color=col, alpha=0.35, lw=0, zorder=2)
+        ax.plot(xs, base + h * ys, color=col, lw=1.3, zorder=3)
+        ax.plot([mode, mode], [base, base + h], color=col, lw=1.6, zorder=4)
+        ax.text(1.78, base + 0.04, name, fontsize=13, style="italic", color=col, ha="left", va="bottom")
+    else:
+        ax.plot(xs, base + h * ys, color=GREY, lw=1.2, ls=(0, (4, 3)), zorder=3)
+        ax.text(1.78, base + 0.055, name, fontsize=13, style="italic", color=GREY, ha="left", va="bottom")
+        ax.text(1.78, base + 0.008, "predicted", fontsize=9.5, color=GREY, ha="left", va="bottom")
+
+# ---------- (b) affine response in the dose ----------
+bx = fig.add_subplot(gs[1])
+bx.text(-0.2, 0.985, "b", transform=bx.transAxes, fontsize=17, fontweight="bold", va="top", color=INK)
+bx.axvspan(1, -1, color=BAND, zorder=0)
+bx.axhline(0, color=INK, lw=0.9, zorder=1)
+lam_fit, lam_held = np.array([1, 0, -1]), np.array([0.5, -0.5])
+# values read off the paper's figure
+ET = lambda l: -0.35 - 0.78 * l
+EF = lambda l: -0.125 - 0.725 * l
+ll = np.array([1.05, -1.05])
+for f, col in [(ET, GREEN), (EF, RED)]:
+    bx.plot(ll, f(ll), color=col, lw=2.2, zorder=2)
+    bx.errorbar(lam_fit, f(lam_fit), yerr=[0.03, 0.07, 0.03], fmt="o", color=col, ms=7, ecolor=col, elinewidth=1.3, capsize=0, zorder=4)
+    bx.plot(lam_held, f(lam_held), "o", mfc="white", mec=col, mew=1.6, ms=7, zorder=4)
+bx.set_xlim(1.15, -1.15); bx.set_ylim(-1.3, 0.85)
+bx.set_xticks([1, 0.5, 0, -0.5, -1]); bx.set_xticklabels(["+1", "+½", "0", "−½", "−1"])
+bx.set_yticks([-1.0, -0.5, 0.0, 0.5])
+bx.tick_params(labelsize=12.5, length=3, colors=INK)
+bx.set_xlabel(r"dose $\lambda$", fontsize=14, color=INK)
+bx.set_ylabel(r"$E_r$", fontsize=15, color=INK, rotation=0, labelpad=14, va="center")
+for s in ("top", "right"): bx.spines[s].set_visible(False)
+for s in ("left", "bottom"): bx.spines[s].set_color(INK)
+bx.legend(handles=[Line2D([], [], color=GREEN, lw=2, marker="o", ms=6, label=r"true side $E_T$"),
+                   Line2D([], [], color=RED, lw=2, marker="o", ms=6, label=r"false side $E_F$"),
+                   Line2D([], [], color="none", marker="o", mfc="white", mec=INK, mew=1.4, ms=6.5, label="held-out dose")],
+          loc="lower right", frameon=False, fontsize=12, handlelength=2.2, borderaxespad=0.3)
 fig.savefig("figures/dose.png", dpi=150, facecolor="white")
-print("seed", seed, "rho", round(rho, 3))
+print("ok")
