@@ -1,88 +1,85 @@
-"""Tile for 'Every Ablation Is a Dose' (arXiv:2610.02173): a high-resolution
-redraw of the paper's two-panel dose figure (reference screenshot in
-figures_src/dose_paper_figure.png). Panel (a): the dose axis and where
-conventional ablations land on it. Panel (b): one direction's response is
-affine in the dose; held-out doses at +-1/2 fall on the fit. Values in (b)
-are read off the paper's figure. Run from the repo root."""
-import numpy as np, matplotlib
+"""Tile for 'Every Ablation Is a Dose' (arXiv:2610.02173): a redraw of the
+paper's clean-world / dosed-world diagram (reference screenshot in
+figures_src/dose_paper_worlds.png), stacked so each panel fills the tile
+width. Run from the repo root."""
+import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
+from matplotlib.patches import FancyBboxPatch, Circle
 
-plt.rcParams.update({"font.family": "STIXGeneral", "mathtext.fontset": "stix",
-                     "font.size": 14, "axes.linewidth": 0.8})
-INK, BAND = "#1f2a3a", "#ebebeb"
-BLUE, ORANGE, GREY = "#4f86c6", "#e8743b", "#8c8c8c"
-GREEN, RED = "#2a9d6b", "#d8432c"
+plt.rcParams.update({"font.family": "STIXGeneral", "mathtext.fontset": "stix"})
+INK, STREAM, GREY, GREYTXT = "#333333", "#b4b4b4", "#b8b8b8", "#8a8a8a"
+RED, REDFILL, GREEN, GREENFILL = "#c92a1e", "#fbe9e6", "#2e8b57", "#e9f4ec"
+YS = 1.9  # residual stream height
 
-fig = plt.figure(figsize=(8, 5), dpi=150)
-gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.08], left=0.03, right=0.985, top=0.93, bottom=0.14, wspace=0.28)
+def box(ax, x, y, w, h, text, ec, fc="white", ls="-", fs=15, tc=None, lw=1.3):
+    ax.add_patch(FancyBboxPatch((x - w/2, y - h/2), w, h, boxstyle="round,pad=0,rounding_size=0.1",
+                                ec=ec, fc=fc, lw=lw, ls=ls, zorder=3))
+    ax.text(x, y, text, ha="center", va="center", fontsize=fs, color=tc or ec, zorder=4)
 
-# ---------- (a) the dose axis ----------
-ax = fig.add_subplot(gs[0])
-ax.set_xlim(1.8, -1.55); ax.set_ylim(0, 1); ax.axis("off")
-ax.axvspan(1, -1, color=BAND, zorder=0)
-ax.text(1.78, 0.98, "a", fontsize=17, fontweight="bold", va="top", ha="left", color=INK)
+def arrow(ax, x0, y0, x1, y1, color, ls="-", lw=1.2):
+    ax.annotate("", (x1, y1), (x0, y0), zorder=3,
+                arrowprops=dict(arrowstyle="-|>", color=color, lw=lw, ls=ls, mutation_scale=11, shrinkA=0, shrinkB=0))
 
-y_dose = 0.88
-ax.plot([1, -1], [y_dose, y_dose], color=INK, lw=1.8, zorder=2)
-ax.plot([-1, -1.35], [y_dose, y_dose], color=INK, lw=1.4, ls=(0, (3, 2.5)), zorder=2)
-ax.annotate("", (-1.42, y_dose), (-1.35, y_dose), arrowprops=dict(arrowstyle="-|>", color=INK, lw=1.2, mutation_scale=12))
-ax.plot([1, -1], [y_dose, y_dose], "o", color=INK, ms=8, zorder=3)
-ax.plot([0], [y_dose], "D", mfc="white", mec=INK, mew=1.4, ms=8, zorder=3)
+def switch(ax, x, y0, y1, color):
+    """Open contact between y0 (stream side) and y1 (component side)."""
+    ya, yb = y0 + 0.07, y1 - 0.07
+    ax.plot([x], [ya], "o", color=color, ms=3.2, zorder=4)
+    ax.plot([x], [yb], "o", color=color, ms=3.2, zorder=4)
+    ax.plot([x, x - 0.2], [ya, ya + 0.62 * (yb - ya)], color=color, lw=1.2, zorder=4)
 
-y_ax = 0.745
-ax.annotate("", (-1.5, y_ax), (1.2, y_ax), arrowprops=dict(arrowstyle="-|>", color=INK, lw=1.0, mutation_scale=12))
-ax.text(-1.46, y_ax + 0.035, r"$\lambda$", fontsize=15, ha="right", va="bottom", color=INK)
-for x, top, bot in [(1, "+1", "clean"), (0, "0", "neutral"), (-1, "−1", "inverted")]:
-    ax.plot([x, x], [y_ax - 0.015, y_ax + 0.015], color=INK, lw=1)
-    ax.text(x, y_ax - 0.035, top, ha="center", va="top", fontsize=13, color=INK)
-    ax.text(x, y_ax - 0.105, bot, ha="center", va="top", fontsize=13, color=INK)
-
-xs = np.linspace(1.3, -1.55, 600)
-def gauss(mu, sd): return np.exp(-0.5 * ((xs - mu) / sd) ** 2)
-rows = [("zero", BLUE, gauss(0.02, 0.17), True, 0.02),
-        ("mean", ORANGE, gauss(0.03, 0.19), True, 0.03),
-        ("resample", GREY, 0.85 * (gauss(0.9, 0.17) + gauss(-0.9, 0.17)), False, None)]
-y0, h = 0.42, 0.12
-for i, (name, col, ys, filled, mode) in enumerate(rows):
-    base = y0 - i * 0.165
-    ax.plot([1.3, -1.55], [base, base], color=col if filled else GREY, lw=0.9, zorder=1)
-    if filled:
-        ax.fill_between(xs, base, base + h * ys, color=col, alpha=0.35, lw=0, zorder=2)
-        ax.plot(xs, base + h * ys, color=col, lw=1.3, zorder=3)
-        ax.plot([mode, mode], [base, base + h], color=col, lw=1.6, zorder=4)
-        ax.text(1.78, base + 0.04, name, fontsize=13, style="italic", color=col, ha="left", va="bottom")
+def grey_component(ax, x, y, above):
+    box(ax, x, y, 0.95, 0.55, "· · ·", GREY, ls=(0, (2, 2)), fs=15, tc=GREYTXT)
+    top, bot = (YS + 0.1, y - 0.3) if above else (y + 0.3, YS - 0.1)
+    if above:
+        arrow(ax, x - 0.2, top, x - 0.2, bot, GREY)          # stream -> component
+        arrow(ax, x + 0.2, bot, x + 0.2, top, GREY)          # component -> stream
     else:
-        ax.plot(xs, base + h * ys, color=GREY, lw=1.2, ls=(0, (4, 3)), zorder=3)
-        ax.text(1.78, base + 0.055, name, fontsize=13, style="italic", color=GREY, ha="left", va="bottom")
-        ax.text(1.78, base + 0.008, "predicted", fontsize=9.5, color=GREY, ha="left", va="bottom")
+        arrow(ax, x - 0.2, bot, x - 0.2, top, GREY)
+        arrow(ax, x + 0.2, top, x + 0.2, bot, GREY)
 
-# ---------- (b) affine response in the dose ----------
-bx = fig.add_subplot(gs[1])
-bx.text(-0.2, 0.985, "b", transform=bx.transAxes, fontsize=17, fontweight="bold", va="top", color=INK)
-bx.axvspan(1, -1, color=BAND, zorder=0)
-bx.axhline(0, color=INK, lw=0.9, zorder=1)
-lam_fit, lam_held = np.array([1, 0, -1]), np.array([0.5, -0.5])
-# values read off the paper's figure
-ET = lambda l: -0.35 - 0.78 * l
-EF = lambda l: -0.125 - 0.725 * l
-ll = np.array([1.05, -1.05])
-for f, col in [(ET, GREEN), (EF, RED)]:
-    bx.plot(ll, f(ll), color=col, lw=2.2, zorder=2)
-    bx.errorbar(lam_fit, f(lam_fit), yerr=[0.03, 0.07, 0.03], fmt="o", color=col, ms=7, ecolor=col, elinewidth=1.3, capsize=0, zorder=4)
-    bx.plot(lam_held, f(lam_held), "o", mfc="white", mec=col, mew=1.6, ms=7, zorder=4)
-bx.set_xlim(1.15, -1.15); bx.set_ylim(-1.3, 0.85)
-bx.set_xticks([1, 0.5, 0, -0.5, -1]); bx.set_xticklabels(["+1", "+½", "0", "−½", "−1"])
-bx.set_yticks([-1.0, -0.5, 0.0, 0.5])
-bx.tick_params(labelsize=12.5, length=3, colors=INK)
-bx.set_xlabel(r"dose $\lambda$", fontsize=14, color=INK)
-bx.set_ylabel(r"$E_r$", fontsize=15, color=INK, rotation=0, labelpad=14, va="center")
-for s in ("top", "right"): bx.spines[s].set_visible(False)
-for s in ("left", "bottom"): bx.spines[s].set_color(INK)
-bx.legend(handles=[Line2D([], [], color=GREEN, lw=2, marker="o", ms=6, label=r"true side $E_T$"),
-                   Line2D([], [], color=RED, lw=2, marker="o", ms=6, label=r"false side $E_F$"),
-                   Line2D([], [], color="none", marker="o", mfc="white", mec=INK, mew=1.4, ms=6.5, label="held-out dose")],
-          loc="lower right", frameon=False, fontsize=12, handlelength=2.2, borderaxespad=0.3)
+def world(ax, dosed):
+    ax.set_xlim(0, 12); ax.set_ylim(0, 3.75); ax.set_aspect("equal"); ax.axis("off")
+    ax.add_patch(FancyBboxPatch((0.12, 0.08), 11.76, 3.6, boxstyle="round,pad=0,rounding_size=0.18",
+                                ec="#9a9a9a", fc="white", lw=1.0, zorder=0))
+    title = r"(b) dosed world, $b=\pi_\lambda$" if dosed else r"(a) clean world, $b=\varnothing$"
+    ax.text(0.45, 3.33, title, fontsize=16, color=INK, va="center", zorder=4)
+
+    # residual stream
+    ax.plot([1.05, 10.55], [YS, YS], color=STREAM, lw=6, solid_capstyle="butt", zorder=1)
+    arrow(ax, 10.5, YS, 10.95, YS, STREAM, lw=4)
+    box(ax, 0.78, YS, 0.5, 0.5, r"$x$", GREEN, fc=GREENFILL, fs=16)
+    ax.add_patch(Circle((11.3, YS), 0.33, ec=INK, fc="white", lw=1.2, zorder=3))
+    ax.add_patch(Circle((11.3, YS), 0.26, ec=INK, fc="white", lw=1.2, zorder=3))
+    ax.text(11.3, YS, r"$D$", ha="center", va="center", fontsize=15, color=INK, zorder=4)
+
+    # upper row: a grey component, then the readout r with its activation written in
+    grey_component(ax, 2.5, 2.85, above=True)
+    ar = r"$a_r(x';\pi_\lambda)$" if dosed else r"$a_r(x';\varnothing)$"
+    box(ax, 5.2, 2.85, 2.05, 0.55, ar, RED, fc=REDFILL, fs=15)
+    box(ax, 7.6, 2.85, 0.75, 0.55, r"$r$", RED, fc=REDFILL, fs=16)
+    arrow(ax, 6.26, 2.85, 7.2, 2.85, RED, ls=(0, (3, 2)))
+    switch(ax, 7.4, YS + 0.1, 2.57, INK)                     # stream -> r cut
+    arrow(ax, 7.8, 2.57, 7.8, YS + 0.1, RED)                 # r -> stream
+
+    # lower row: the core c, then grey components
+    cy = 0.95
+    if dosed:
+        box(ax, 4.5, cy, 0.8, 0.55, r"$c$", RED, fc=REDFILL, fs=16)
+        box(ax, 1.95, cy, 2.55, 0.55, "$a_c$ \u2254 $m - \\frac{\\lambda}{2}\\Delta$", RED, fc=REDFILL, fs=15)
+        arrow(ax, 3.25, cy, 4.08, cy, RED, ls=(0, (3, 2)))
+        switch(ax, 4.3, cy + 0.28, YS - 0.1, INK)            # stream -> c cut
+    else:
+        box(ax, 4.5, cy, 0.8, 0.55, r"$c$", INK, fs=16)
+        arrow(ax, 4.3, YS - 0.1, 4.3, cy + 0.28, INK)        # stream -> c
+    arrow(ax, 4.7, cy + 0.28, 4.7, YS - 0.1, INK)            # c -> stream
+    ax.text(4.5, 0.42, "core", ha="center", va="center", fontsize=14, color=GREYTXT, zorder=4)
+    grey_component(ax, 6.9, cy, above=False)
+    grey_component(ax, 9.1, cy, above=False)
+
+fig, (a, b) = plt.subplots(2, 1, figsize=(8, 5), dpi=150,
+                           gridspec_kw=dict(left=0.01, right=0.99, top=0.99, bottom=0.01, hspace=0.04))
+world(a, dosed=False)
+world(b, dosed=True)
 fig.savefig("figures/dose.png", dpi=150, facecolor="white")
 print("ok")
