@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schematic: an activity graph of everyday events with one path highlighted, and the per-layer effect of path patching peaking in the upper-middle layers.">
+  <style>
+    .bg{fill:#e8ecf0}.ink{stroke:#17202b}.inkf{fill:#17202b}.mut{stroke:#8a94a1}.mutf{fill:#8a94a1}
+    .blue{stroke:#2c66ae}.bluef{fill:#2c66ae}.red{stroke:#b4343c}.redf{fill:#b4343c}
+    .redw{fill:#b4343c;fill-opacity:.12}.bluew{fill:#2c66ae;fill-opacity:.12}
+    .open{fill:#e8ecf0}
+    text{font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#56606d}
+    .lab{font-family:Newsreader,"Iowan Old Style",Georgia,serif;font-style:italic;font-size:15px;fill:#17202b}
+    @media (prefers-color-scheme:dark){
+      .bg{fill:#1a2029}.ink{stroke:#e4e8ed}.inkf{fill:#e4e8ed}.mut{stroke:#6b7682}.mutf{fill:#6b7682}
+      .blue{stroke:#74a6e2}.bluef{fill:#74a6e2}.red{stroke:#e57d84}.redf{fill:#e57d84}
+      .redw{fill:#e57d84;fill-opacity:.14}.bluew{fill:#74a6e2;fill-opacity:.14}.open{fill:#1a2029}
+      text{fill:#9aa4b1}.lab{fill:#e4e8ed}
+    }
+  </style>
+  <!-- activity graph -->
+  <g class="mut" stroke-width="1.4" fill="none">
+    <path d="M40 150 L80 100 L130 110 L175 70 L205 120"/>
+    <path d="M40 150 L85 160 L130 110"/>
+    <path d="M85 160 L130 200 L175 170 L205 120"/>
+    <path d="M130 110 L175 170"/>
+    <path d="M80 100 L130 60 L175 70"/>
+  </g>
+  <path class="ink" fill="none" stroke-width="2.4" d="M40 150 L85 160 L130 110 L175 170 L205 120"/>
+  <g class="open ink" stroke-width="1.5">
+    <circle cx="80" cy="100" r="5"/><circle cx="130" cy="60" r="5"/><circle cx="175" cy="70" r="5"/>
+    <circle cx="130" cy="200" r="5"/>
+  </g>
+  <g class="inkf">
+    <circle cx="40" cy="150" r="5.5"/><circle cx="85" cy="160" r="5.5"/><circle cx="130" cy="110" r="5.5"/>
+    <circle cx="175" cy="170" r="5.5"/><circle cx="205" cy="120" r="5.5"/>
+  </g>
+  <text x="122" y="244" text-anchor="middle">activity graph</text>
+  <text x="122" y="262" text-anchor="middle"><tspan>10</tspan><tspan font-size="9" baseline-shift="super">17</tspan><tspan> questions per activity</tspan></text>
+  <!-- path patching effect by layer -->
+  <g transform="translate(262 40)">
+    <line class="mut" x1="0" y1="0" x2="0" y2="200" stroke-width="1"/>
+    <g class="mutf">
+      <rect x="2" y="0"   width="4"  height="5"/><rect x="2" y="7"   width="3"  height="5"/><rect x="2" y="14"  width="5"  height="5"/>
+      <rect x="2" y="21"  width="4"  height="5"/><rect x="2" y="28"  width="6"  height="5"/><rect x="2" y="35"  width="4"  height="5"/>
+      <rect x="2" y="42"  width="5"  height="5"/><rect x="2" y="49"  width="7"  height="5"/><rect x="2" y="56"  width="5"  height="5"/>
+      <rect x="2" y="63"  width="6"  height="5"/><rect x="2" y="70"  width="8"  height="5"/><rect x="2" y="77"  width="6"  height="5"/>
+      <rect x="2" y="84"  width="9"  height="5"/><rect x="2" y="91"  width="7"  height="5"/><rect x="2" y="98"  width="10" height="5"/>
+      <rect x="2" y="105" width="9"  height="5"/><rect x="2" y="112" width="12" height="5"/><rect x="2" y="119" width="14" height="5"/>
+      <rect x="2" y="126" width="18" height="5"/><rect x="2" y="133" width="24" height="5"/>
+    </g>
+    <g class="redf">
+      <rect x="2" y="140" width="48" height="5"/><rect x="2" y="147" width="62" height="5"/><rect x="2" y="154" width="70" height="5"/>
+      <rect x="2" y="161" width="78" height="5"/><rect x="2" y="168" width="84" height="5"/><rect x="2" y="175" width="88" height="5"/>
+      <rect x="2" y="182" width="96" height="5"/>
+    </g>
+    <g class="mutf">
+      <rect x="2" y="189" width="70" height="5"/><rect x="2" y="196" width="40" height="5"/>
+    </g>
+    <text x="-6" y="5" text-anchor="end">1</text>
+    <text x="-6" y="146" text-anchor="end">20</text>
+    <text x="-6" y="188" text-anchor="end">26</text>
+    <text x="-6" y="202" text-anchor="end">32</text>
+    <text class="lab" x="-26" y="105" text-anchor="middle" transform="rotate(-90 -26 105)">layer</text>
+    <text x="50" y="222" text-anchor="middle">patching effect</text>
+  </g>
+</svg>

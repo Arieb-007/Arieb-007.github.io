@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schematic: the same everyday events drawn as a dense observational graph and as a sparse causal graph, with a causal query between two events.">
+  <style>
+    .bg{fill:#e8ecf0}.ink{stroke:#17202b}.inkf{fill:#17202b}.mut{stroke:#8a94a1}.mutf{fill:#8a94a1}
+    .blue{stroke:#2c66ae}.bluef{fill:#2c66ae}.red{stroke:#b4343c}.redf{fill:#b4343c}
+    .redw{fill:#b4343c;fill-opacity:.12}.bluew{fill:#2c66ae;fill-opacity:.12}
+    .open{fill:#e8ecf0}
+    text{font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#56606d}
+    .lab{font-family:Newsreader,"Iowan Old Style",Georgia,serif;font-style:italic;font-size:15px;fill:#17202b}
+    @media (prefers-color-scheme:dark){
+      .bg{fill:#1a2029}.ink{stroke:#e4e8ed}.inkf{fill:#e4e8ed}.mut{stroke:#6b7682}.mutf{fill:#6b7682}
+      .blue{stroke:#74a6e2}.bluef{fill:#74a6e2}.red{stroke:#e57d84}.redf{fill:#e57d84}
+      .redw{fill:#e57d84;fill-opacity:.14}.bluew{fill:#74a6e2;fill-opacity:.14}.open{fill:#1a2029}
+      text{fill:#9aa4b1}.lab{fill:#e4e8ed}
+    }
+  </style>
+  <!-- shared node positions, two panels -->
+  <g transform="translate(20 0)">
+    <g class="mut" stroke-width="1.2" fill="none" stroke-dasharray="3 3">
+      <path d="M40 80 L100 60 L160 90 L130 150 L70 170 Z"/>
+      <path d="M40 80 L160 90 M40 80 L130 150 M100 60 L130 150 M100 60 L70 170 M160 90 L70 170"/>
+      <path d="M100 60 L100 120 M40 80 L100 120 M160 90 L100 120 M130 150 L100 120 M70 170 L100 120"/>
+    </g>
+    <g class="inkf">
+      <circle cx="40" cy="80" r="5"/><circle cx="100" cy="60" r="5"/><circle cx="160" cy="90" r="5"/>
+      <circle cx="130" cy="150" r="5"/><circle cx="70" cy="170" r="5"/><circle cx="100" cy="120" r="5"/>
+    </g>
+    <text x="100" y="212" text-anchor="middle">observational</text>
+  </g>
+  <g transform="translate(210 0)">
+    <g class="blue" stroke-width="2" fill="none">
+      <path d="M40 80 L100 60"/><path d="M100 60 L160 90"/><path d="M100 60 L100 120"/><path d="M100 120 L130 150"/><path d="M40 80 L70 170"/>
+    </g>
+    <g class="bluef">
+      <path d="M100 60 l-9 -1 l3 6 z" transform="rotate(-18 100 60)"/>
+      <path d="M160 90 l-9 -1 l3 6 z" transform="rotate(27 160 90)"/>
+      <path d="M100 120 l-9 -1 l3 6 z" transform="rotate(90 100 120)"/>
+      <path d="M130 150 l-9 -1 l3 6 z" transform="rotate(45 130 150)"/>
+      <path d="M70 170 l-9 -1 l3 6 z" transform="rotate(72 70 170)"/>
+    </g>
+    <g class="inkf">
+      <circle cx="40" cy="80" r="5"/><circle cx="100" cy="60" r="5"/><circle cx="160" cy="90" r="5"/>
+      <circle cx="130" cy="150" r="5"/><circle cx="70" cy="170" r="5"/><circle cx="100" cy="120" r="5"/>
+    </g>
+    <text x="100" y="212" text-anchor="middle">causal</text>
+  </g>
+  <line class="mut" x1="200" y1="46" x2="200" y2="222" stroke-width="1"/>
+  <!-- query -->
+  <g transform="translate(34 258)">
+    <circle class="inkf" cx="0" cy="0" r="5"/>
+    <text x="14" y="4">cause?</text>
+    <line class="blue" x1="68" y1="0" x2="118" y2="0" stroke-width="2"/>
+    <path class="bluef" d="M118 0 l-7 -4 v8 z"/>
+    <circle class="inkf" cx="130" cy="0" r="5"/>
+    <text x="144" y="4">effect</text>
+    <text x="192" y="4">vs</text>
+    <line class="mut" x1="214" y1="0" x2="250" y2="0" stroke-width="1.4" stroke-dasharray="3 3"/>
+    <circle class="open ink" cx="262" cy="0" r="5" stroke-width="1.4"/>
+    <text x="276" y="4">merely later</text>
+  </g>
+</svg>

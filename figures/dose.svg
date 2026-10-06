@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schematic: unit responses are straight lines in the intervention strength lambda; blue slopes counteract, red slopes reinforce.">
+  <style>
+    .bg{fill:#e8ecf0}.ink{stroke:#17202b}.inkf{fill:#17202b}.mut{stroke:#8a94a1}.mutf{fill:#8a94a1}
+    .blue{stroke:#2c66ae}.bluef{fill:#2c66ae}.red{stroke:#b4343c}.redf{fill:#b4343c}
+    .redw{fill:#b4343c;fill-opacity:.12}.bluew{fill:#2c66ae;fill-opacity:.12}
+    .open{fill:#e8ecf0}
+    text{font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#56606d}
+    .lab{font-family:Newsreader,"Iowan Old Style",Georgia,serif;font-style:italic;font-size:15px;fill:#17202b}
+    @media (prefers-color-scheme:dark){
+      .bg{fill:#1a2029}.ink{stroke:#e4e8ed}.inkf{fill:#e4e8ed}.mut{stroke:#6b7682}.mutf{fill:#6b7682}
+      .blue{stroke:#74a6e2}.bluef{fill:#74a6e2}.red{stroke:#e57d84}.redf{fill:#e57d84}
+      .redw{fill:#e57d84;fill-opacity:.14}.bluew{fill:#74a6e2;fill-opacity:.14}.open{fill:#1a2029}
+      text{fill:#9aa4b1}.lab{fill:#e4e8ed}
+    }
+  </style>
+  <!-- axes: x = λ in [-1,1] mapped to 50..370; y = E in [-1.1,1.1] mapped to 250..40 -->
+  <line class="mut" x1="50" y1="145" x2="370" y2="145" stroke-width="1"/>
+  <line class="mut" x1="210" y1="36" x2="210" y2="252" stroke-width="1" stroke-dasharray="3 4"/>
+  <text x="50" y="272" text-anchor="middle">−1</text>
+  <text x="210" y="272" text-anchor="middle">0</text>
+  <text x="370" y="272" text-anchor="middle">1</text>
+  <text class="lab" x="384" y="150">λ</text>
+  <text class="lab" x="22" y="30">E<tspan font-size="11" baseline-shift="sub">r</tspan>(λ)</text>
+  <!-- units: own, gamma -> y = 145 - (own + g*λ)*95 -->
+  <line class="blue" x1="50" y1="50"  x2="370" y2="135" stroke-width="2.2"/>
+  <line class="blue" x1="50" y1="64"  x2="370" y2="197" stroke-width="2.2"/>
+  <line class="blue" x1="50" y1="135" x2="370" y2="192" stroke-width="2.2"/>
+  <line class="red"  x1="50" y1="159" x2="370" y2="64"  stroke-width="2.2"/>
+  <line class="red"  x1="50" y1="216" x2="370" y2="159" stroke-width="2.2"/>
+  <circle class="open blue" cx="210" cy="92.5" r="4" stroke-width="1.6"/>
+  <circle class="open blue" cx="210" cy="130.5" r="4" stroke-width="1.6"/>
+  <circle class="open blue" cx="210" cy="163.5" r="4" stroke-width="1.6"/>
+  <circle class="open red"  cx="210" cy="111.5" r="4" stroke-width="1.6"/>
+  <circle class="open red"  cx="210" cy="187.5" r="4" stroke-width="1.6"/>
+  <!-- probe at λ = 0.6 -->
+  <line class="ink" x1="306" y1="36" x2="306" y2="252" stroke-width="1"/>
+  <circle class="bluef" cx="306" cy="118" r="4.5"/>
+  <circle class="bluef" cx="306" cy="170" r="4.5"/>
+  <circle class="bluef" cx="306" cy="180.5" r="4.5"/>
+  <circle class="redf"  cx="306" cy="83"  r="4.5"/>
+  <circle class="redf"  cx="306" cy="170.5" r="4.5"/>
+</svg>
