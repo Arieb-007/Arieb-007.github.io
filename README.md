@@ -9,7 +9,7 @@ Personal research site, served by GitHub Pages from the `main` branch. Plain HTM
 | `reading.html` | Bookshelf |
 | `style.css` | Shared styles, light and dark |
 | `figures/*.png` | A detail cropped from each paper's main figure (from the papers' GitHub repos), used on the home page and as thumbnails on the publications page |
-| `figures/dose.png` | For the ablation paper: a full-resolution redraw of its clean-world / dosed-world diagram, rendered by `figures_src/dose_fig.py` (reference screenshots in `figures_src/dose_paper_*.png`) |
+| `figures/dose-worlds.png` | For the ablation paper: a full-resolution redraw of its clean-world / dosed-world diagram, rendered by `figures_src/dose_fig.py` (reference screenshots in `figures_src/dose_paper_*.png`) |
 | `figures_src/` | Sources for figures: the plotting script, and original full-size figures that the crops in `figures/` come from |
 | `favicon.svg` | Site icon |
 

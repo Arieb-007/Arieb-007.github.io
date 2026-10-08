@@ -81,5 +81,5 @@ fig, (a, b) = plt.subplots(2, 1, figsize=(8, 5), dpi=150,
                            gridspec_kw=dict(left=0.01, right=0.99, top=0.99, bottom=0.01, hspace=0.04))
 world(a, dosed=False)
 world(b, dosed=True)
-fig.savefig("figures/dose.png", dpi=150, facecolor="white")
+fig.savefig("figures/dose-worlds.png", dpi=150, facecolor="white")
 print("ok")

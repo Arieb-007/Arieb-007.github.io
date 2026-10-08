@@ -162,6 +162,7 @@ em.var { font-style: italic; }
   font-size: 1.375rem;
   line-height: 1.5;
   max-width: 38rem;
+  text-wrap: pretty;
   font-variation-settings: "opsz" 24;
 }
 
