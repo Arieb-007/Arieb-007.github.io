@@ -188,14 +188,6 @@ em.var { font-style: italic; }
 main > section, .foraging, .background { padding-top: 3.5rem; }
 .foraging { padding-top: 4rem; }
 
-/* ---------- questions ---------- */
-
-.questions { margin: 0; padding: 0; list-style: none; }
-.questions li { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
-.questions li:last-child { border-bottom: 1px solid var(--rule); }
-.questions h3 { margin-bottom: 0.35rem; }
-.questions p { margin: 0; }
-
 /* ---------- papers plate ---------- */
 
 .papers-band {

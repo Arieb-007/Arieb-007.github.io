@@ -4,7 +4,7 @@ Personal research site, served by GitHub Pages from the `main` branch. Plain HTM
 
 | File | What it is |
 | --- | --- |
-| `index.html` | Home: research statement, questions, papers with figures, background |
+| `index.html` | Home: research statement, papers with figures, foraging project, background |
 | `publications.html` | Full publication list by year, with links and code, plus earlier projects |
 | `reading.html` | Bookshelf |
 | `style.css` | Shared styles, light and dark |
